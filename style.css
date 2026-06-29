@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Fraunces', serif;
@@ -21,13 +25,9 @@ body::before {
   z-index: -1;
 }
 
-header {
-  position: sticky;   /* makes the whole header stick */
-  top: 0;             /* stick to the very top */
-  z-index: 1000;      /* keep it above other content */
-}
-
 header nav {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +35,6 @@ header nav {
   padding: 15px 40px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.5);
 }
-
 
 header h1 {
   font-family: 'Poppins', sans-serif;
@@ -47,22 +46,6 @@ header ul {
   list-style: none;
   display: flex;
   gap: 25px;
-}
-
-header ul li + li {
-  position: relative;
-  padding-left: 15px;
-}
-
-header ul li + li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 18px;
-  width: 1.5px;
-  background-color: rgba(255, 255, 255, 0.45);
 }
 
 header ul li a {
@@ -87,12 +70,56 @@ header ul li a:hover {
   margin: 0 auto;
 }
 
+.about-image,
+.about-text {
+  flex: 1 1 0;
+  width: 50%;
+}
+
 .about-image img {
-  width: 450px;
+  width: 100%;
+  max-width: 100%;
   height: auto;
   border-radius: 20px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.7);
   border: 3px solid #ff7b54;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 30px;
+  }
+
+  .about-image {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-text {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+    padding: 24px;
+  }
+
+  .about-image img {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .about-text h2 {
+    font-size: 38px;
+  }
+
+  .about-text p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
 }
 
 .about-text {
@@ -161,7 +188,7 @@ header ul li a:hover {
 
 .photo-card h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size:  40px;
+  font-size: 40px;
   color: #232222;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -247,90 +274,3 @@ body.modal-open {
 html.modal-open {
   overflow: hidden;
 }
-
-/* Mobile Responsive Styles */
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 28px;
-  }
-
-  header ul {
-    gap: 15px;
-  }
-
-  header ul li a {
-    font-size: 16px;
-  }
-
-  .about-container {
-  display: flex;
-  flex-direction: column;   /* stack items vertically */
-  align-items: center;      /* center them horizontally */
-  justify-content: center;
-  gap: 30px;                /* space between image and text */
-  padding: 60px 20px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-
-  .about-image img {
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .about-text {
-    max-width: 100%;
-    padding: 20px;
-  }
-
-  .about-text h2 {
-    font-size: 36px;
-  }
-
-  .about-text p {
-    font-size: 18px;
-    line-height: 1.6;
-  }
-
-  .circle-values {
-    width: 250px;
-    height: 250px;
-    border-width: 3px;
-  }
-
-  .circle-values span {
-    font-size: 18px;
-  }
-
-  .gallery {
-    padding: 30px 20px;
-    gap: 20px;
-  }
-
-  .photo-card {
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .photo-card h1 {
-    font-size: 28px;
-  }
-
-  .modal-content {
-    flex-direction: column;
-    width: 95%;
-  }
-
-  .modal-content img {
-    width: 100%;
-    border-right: none;
-    border-bottom: 3px solid #ff7b54;
-  }
-
-  .modal-text {
-    width: 100%;
-    padding: 20px;
-  }
-}
-
