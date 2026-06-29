@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section Champions - Gallery</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Amaranth&family=Fraunces&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Bebas+Neue&display=swap" rel="stylesheet"
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Section Champions</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="gallery">
+    <div class="photo-card" onclick="openModal('image1')">
+      <img src="image1.jpg" alt="Helping Hands">
+      <h1>Helping hands</h1>
+    </div>
+
+    <div class="photo-card" onclick="openModal('image2')">
+      <img src="image2.jpg" alt="Street Adventure">
+      <h1> Adventure </h1>
+    </div>
+
+    <div class="photo-card" onclick="openModal('image3')">
+      <img src="image3.jpg" alt="Class Unity">
+      <h1> Class Unity </h1>
+    </div>
+
+    <div class="photo-card" onclick="openModal('image4')">
+      <img src="image4.jpg" alt="Classroom Chaos">
+      <h1> Christmas Party </h1>
+    </div>
+
+    <div class="photo-card" onclick="openModal('image6')">
+      <img src="image6.jpg" alt="Outdoor Bonding">
+      <h1> Fiesta Procession </h1>
+    </div>
+
+    <div class="photo-card" onclick="openModal('image7')">
+      <img src="image7.jpg" alt="Group Energy">
+      <h1> Group energy </h1>
+    </div>
+
+    <div class="photo-card" onclick="openModal('image8')">
+      <img src="image8.jpg" alt="Solid Squad">
+      <h1> Solid Squad </h1>
+    </div>
+
+    <div class="photo-card" onclick="openModal('image9')">
+      <img src="image9.jpg" alt="Dinner Celebration">
+      <h1> Lunch Celebration </h1>
+    </div>
+  </section>
+
+  <div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="">
+      <div class="modal-text">
+        <h2 id="modal-title"></h2>
+        <p id="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const descriptions = {
+    image1: {title: "Helping Hands", desc: "A group of classmates gather in a chapel, surrounded by bags of donations, smiling as they work together. This moment reflects being service oriented and responsible, showing how teamwork and faith can turn small efforts into meaningful impact for the community."},
+
+    image2: {title: "Street Adventure", desc: "Friends walk together down the street, laughing and enjoying the spontaneity of the day. It’s a carefree moment that highlights the joy of being truthful and genuine with one another, living responsibly while embracing the fun of being young."},
+
+    image3: {title: "Class Unity", desc: "Inside the classroom, students sit together, sharing ideas and laughter. This scene reflects being hardworking and responsible, balancing fun with dedication to learning, and showing how unity makes challenges easier to face."},
+
+    image4: {title: "Christmas Party", desc: "The section celebrates Christmas with decorations, food, and laughter. It’s a joyful gathering rooted in gratitude, reflecting a God‑fearing spirit and the value of fellowship, where kindness and service shine through in simple acts of sharing."},
+    
+    image6: {title: "Fiesta Procession", desc: "Students join a lively procession, walking together in celebration of tradition. This moment connects to being truthful and service‑oriented, honoring culture with sincerity and showing respect for community responsibilities."},
+
+    image7: {title: "Group Energy", desc: "Everyone poses together with loud cheers and playful gestures, radiating positivity. This picture reflects being hardworking and responsible, showing that energy and enthusiasm are just as important as perseverance in building strong bonds."},
+
+    image8: {title: "Solid Squad", desc: "Friends stand side by side, united and confident. This moment reflects truthfulness and responsibility, showing loyalty, honesty, and the strength of a group that supports one another through challenges."},
+
+    image9: {title: "Dinner Celebration", desc: "Around a table filled with food, classmates laugh and share stories. This scene reflects a God‑fearing gratitude and a responsible fellowship, where sharing meals becomes a way to celebrate blessings and strengthen friendships."}
+  };
+
+  function openModal(id) {
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+
+    modal.style.display = 'flex';
+    modalImg.src = id + '.jpg';
+    modalTitle.textContent = descriptions[id].title;
+    modalDesc.textContent = descriptions[id].desc;
+    document.body.classList.add('modal-open');
+    document.documentElement.classList.add('modal-open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+    document.body.classList.remove('modal-open');
+    document.documentElement.classList.remove('modal-open');
+  }
+
+  const cards = document.querySelectorAll('.photo-card');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('show')) {
+        const index = Array.from(cards).indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('show');
+        }, index * 180);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  cards.forEach(card => {
+    observer.observe(card);
+  });
+</script>
+
+</body>
+</html>
